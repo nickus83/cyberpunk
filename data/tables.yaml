@@ -1,0 +1,407 @@
+roles:
+- Rockerboy
+- Solo
+- Netrunner
+- Tech
+- Medtech
+- Media
+- Exec
+- Lawmen
+- Fixer
+- Nomad
+
+Cultural Origins:
+  1:
+    Cultural Region: North American
+    Languages: [Chinese, Cree, Creole, English, French, Navajo, Spanish]
+  2:
+    Cultural Region: South American/Central American
+    Languages: [Creole, English, German, Guarani, Mayan, Portuguese, Quechua, Spanish]
+  3:
+    Cultural Region: Western European
+    Languages: [Dutch, English, French, German, Italian, Norwegian, Portuguese, Spanish]
+  4:
+    Cultural Region: Eastern European
+    Languages: [English, Finnish, Polish, Romanian, Russian, Ukrainian]
+  5:
+    Cultural Region: Middle Eastern/North African
+    Languages: [Arabic, Berber, English, Farsi, French, Hebrew, Turkish]
+  6:
+    Cultural Region: Sub-Saharan African
+    Languages: [Arabic, English, French, Hausa, Lingala, Oromo, Portuguese, Swahili, Twi, Yoruba]
+  7:
+    Cultural Region: South Asian
+    Languages: [Bengali, Dari, English, Hindi, Nepali, Sinhalese, Tamil, Urdu]
+  8:
+    Cultural Region: South East Asian
+    Languages: [Arabic, Burmese, English, Filipino, Hindi, Indonesian, Khmer, Malayan, Vietnamese]
+  9:
+    Cultural Region: East Asian
+    Languages: [Cantonese Chinese, English, Japanese, Korean, Mandarin Chinese, Mongolian]
+  10:
+    Cultural Region: Oceania/Pacific Islander
+    Languages: [English, French, Hawaiian, Maori, Pama-Nyungan, Tahitian]
+
+Personality:
+  1: Shy and secretive
+  2: Rebellious, antisocial, and violent
+  3: Arrogant, proud, and aloof
+  4: Moody, rash, and headstrong
+  5: Picky, fussy, and nervous
+  6: Stable and serious
+  7: Silly and fluff-headed
+  8: Sneaky and deceptive
+  9: Intellectual and detached
+  10: Friendly and outgoing
+
+Clothing Style:
+  1: Generic Chic (Standard, Colorful, Modular)
+  2: Leisurewear (Comfort, Agility, Athleticism)
+  3: Urban Flash (Flashy, Technological, Streetwear)
+  4: Businesswear (Leadership, Presence, Authority)
+  5: High Fashion (Exclusive, Designer, Couture)
+  6: Bohemian (Folksy, Retro, Free-spirited)
+  7: Bag Lady Chic (Homeless, Ragged, Vagrant)
+  8: Gang Colors (Dangerous, Violent, Rebellious)
+  9: Nomad Leathers (Western, Rugged, Tribal)
+  10: Asia Pop (Bright, Costume-like, Youthful)
+
+Hairstyle:
+  1: Mohawk
+  2: Long and ratty
+  3: Short and spiked
+  4: Wild and all over
+  5: Bald
+  6: Striped
+  7: Wild colors
+  8: Neat and short
+  9: Short and curly
+  10: Long and straight
+
+Affectation:
+  1: Tattoos
+  2: Mirrorshades
+  3: Ritual scars
+  4: Spiked gloves
+  5: Nose rings
+  6: Tongue or other piercings
+  7: Strange fingernail implants
+  8: Spiked boots or heels
+  9: Fingerless gloves
+  10: Strange contacts
+
+Motivation:
+  1: Money
+  2: Honor
+  3: Your word
+  4: Honesty
+  5: Knowledge
+  6: Vengeance
+  7: Love
+  8: Power
+  9: Family
+  10: Friendship
+
+Relationships:
+  1: I stay neutral.
+  2: I stay neutral.
+  3: I like almost everyone.
+  4: I hate almost everyone.
+  5: People are tools. Use them for your own goals then
+  6: Every person is a valuable individual.
+  7: People are obstacles to be destroyed if they cross
+  8: People are untrustworthy. Don't depend on anyone.
+  9: Wipe them all out and let the cockroaches take over.
+  10: People are wonderful!
+
+Most Valued Person:
+  1: A parent
+  2: A brother or sister
+  3: A lover
+  4: A friend
+  5: Yourself
+  6: A pet
+  7: A teacher or mentor
+  8: A public figure
+  9: A personal hero
+  10: No one
+
+Most Valued Possession:
+  1: A weapon
+  2: A tool
+  3: A piece of clothing
+  4: A photograph
+  5: A book or diary
+  6: A recording
+  7: A musical instrument
+  8: A piece of jewelry
+  9: A toy
+  10: A letter
+
+Family Background:
+  1: ['Corporate Execs', 'Wealthy, powerful, with servants, luxury homes, and the best of everything. Private security made sure you were always safe. You definitely went to a big-name private school.']
+  2: ['Corporate Managers', 'Well to do, with large homes, safe neighborhoods, nice cars, etc. Sometimes your parent(s) would hire servants, although this was rare. You had a mix of private and corporate education.']
+  3: ['Corporate Technicians', 'Middle-middle class, with comfortable conapts or Beaverville suburban homes, minivans and corporate-run technical schools. Kind of like living 1950s America crossed with 1984.']
+  4: ['Nomad Pack', 'You had a mix of rugged trailers, vehicles, and huge road kombis for your home. You learned to drive and fight at an early age, but the family was always there to care for you. Food was actually fresh and abundant. Mostly home schooled.']
+  5: ['Ganger"s', 'A savage, violent home in any place the gang could take over. You were usually hungry, cold, and scared. You probably did not know who your actual parents were. Education? The Gang taught you how to fight, kill, and steal—what else did you need to know?']
+  6: ['Combat Zoners', 'A step up from a gang "family," your home was a decaying building somewhere in the "Zone", heavily fortified. You were hungry at times, but regularly could score a bed and a meal. Home schooled.']
+  7: ['Urban Homeless', 'You lived in cars, dumpsters, or abandoned shipping modules. If you were lucky. You were usually hungry, cold, and scared, unless you were tough enough to fight for the scraps. Education? School of Hard Knocks.']
+  8: ['Megastructure Warren Rats', 'You grew up in one of the huge new megastructures that went up after the War. A tiny conapt, kibble and scop for food, a mostly warm bed. Some better educated adult warren dwellers or a local Corporation may have set up a school.']
+  9: ['Reclaimers', 'You started out on the road, but then moved into one of the deserted ghost towns or cities to rebuild it. A pioneer life: dangerous, but with plenty of simple food and a safe place to sleep. You were home schooled if there was anyone who had the time.']
+  10: ['Edgerunners', 'Your home was always changing based on your parents current "job". Could be a luxury apartment, an urban conapt, or a dumpster if you were on the run. Food and shelter ran the gamut from gourmet to kibble.']
+
+Childhood Environment:
+  1: Ran on The Street, with no adult supervision.
+  2: Spent in a safe Corp Zone walled off from the rest of the City.
+  3: In a Nomad pack moving from place to place.
+  4: In a Nomad pack with roots in transport (ships, planes, caravans).
+  5: In a decaying, once upscale neighborhood, now holding off the boosters to survive.
+  6: In the heart of the Combat Zone, living in a wrecked building or other squat.
+  7: In a huge "megastructure" building controlled by a Corp or the City.
+  8: In the ruins of a deserted town or city taken over by Reclaimers.
+  9: In a Drift Nation (a floating offshore city) that is a meeting place for all kinds of people.
+  10: In a Corporate luxury "starscraper," high above the rest of the teeming rabble.
+
+Family Crisis:
+  1: Your family lost everything through betrayal.
+  2: Your family lost everything through bad management.
+  3: Your family was exiled or otherwise driven from their original home/nation/Corporation.
+  4: Your family is imprisoned, and you alone escaped.
+  5: Your family vanished. You are the only remaining member.
+  6: Your family was killed, and you were the only survivor.
+  7: Your family is involved in a long-term conspiracy, organization, or association, such as a crime family or revolutionary group.
+  8: Your family was scattered to the winds due to misfortune.
+  9: Your family is cursed with a hereditary feud that has lasted for generations.
+  10: You are the inheritor of a family debt; you must honor this debt before moving on with your life.
+
+Friend:
+  1: Like an older sibling to you.
+  2: Like a younger sibling to you.
+  3: A teacher or mentor.
+  4: A partner or coworker.
+  5: A former lover.
+  6: An old enemy.
+  7: Like a parent to you.
+  8: An old childhood friend.
+  9: Someone you know from The Street.
+  10: Someone with a common interest or goal.
+
+Enemy type:
+  1: Ex-friend
+  2: Ex-lover
+  3: Estranged relative
+  4: Childhood enemy
+  5: Person working for you
+  6: Person you work for
+  7: Partner or coworker
+  8: Corporate exec
+  9: Government official
+  10: Boosterganger
+
+Enemy wrong:
+  1: Caused the other to lose face or status.
+  2: Caused the loss of lover, friend, or relative.
+  3: Caused a major public humiliation.
+  4: Accused the other of cowardice or some other major personal flaw.
+  5: Deserted or betrayed the other.
+  6: Turned down the other's offer of a job or romantic involvement.
+  7: You just don't like each other.
+  8: One of you was a romantic rival.
+  9: One of you was a business rival.
+  10: One of you set the other up for a crime they didn't commit.
+
+Enemy throw:
+  1: Just themselves and even they won't go out of their way.
+  2: Just themselves.
+  3: Just themselves and a close friend.
+  4: Themselves and {1d6/2} friends.
+  5: Themselves and {1d10/2} friends.
+  6: An entire gang (at least {1d10 + 5} people).
+  7: The local cops or other Lawmen.
+  8: A powerful gang lord or small Corporation.
+  9: A powerful Corporation.
+  10: An entire city or government or agency.
+
+Enemy meet:
+  1: Avoid the scum.
+  2: Avoid the scum.
+  3: Go into a murderous rage and try to physically rip their face off.
+  4: Go into a murderous rage and try to physically rip their face off.
+  5: Backstab them indirectly.
+  6: Backstab them indirectly.
+  7: Verbally attack them.
+  8: Verbally attack them.
+  9: Set them up for a crime or other transgression they didn't commit.
+  10: Set out to murder or maim them.
+
+Love happened:
+  1: Your lover died in an accident.
+  2: Your lover mysteriously vanished.
+  3: It just didn't work out.
+  4: A personal goal or vendetta came between you and your lover.
+  5: Your lover was kidnapped.
+  6: Your lover went insane or cyberpsycho.
+  7: Your lover committed suicide.
+  8: Your lover was killed in a fight.
+  9: A rival cut you out of the action.
+  10: Your lover is imprisoned or exiled.
+
+Life Goals:
+  1: Get rid of a bad reputation.
+  2: Gain power and control.
+  3: Get off The Street no matter what it takes.
+  4: Cause pain and suffering to anyone who crosses you.
+  5: Live down your past life and try to forget it.
+  6: Hunt down those responsible for your miserable life and make them pay.
+  7: Get what's rightfully yours.
+  8: Save, if possible, anyone else involved in your background, like a lover, or family member.
+  9: Gain fame and recognition.
+  10: Become feared and respected.
+
+Fixer Type:
+  1: Broker deals between rival gangs.
+  2: Procure rare or atypical resources for exclusive clientele.
+  3: Specialize in brokering Solo or Tech services as an agent.
+  4: Supply a regular resource for the Night Markets, like food, medicines, or drugs.
+  5: Procure highly illegal resources, like street drugs or milspec weapons.
+  6: Supply resources for Techs and Medtechs, like parts and medical supplies.
+  7: Operate several successful Night Markets, although not as owner.
+  8: Broker use contracts for heavy machinery, military vehicles, and aircraft.
+  9: Broker deals as a fence for scavengers raiding Corps or Combat Zones.
+  10: Act as an exclusive agent for a Media, Rockerboy, or a Nomad Pack.
+
+Fixer Office:
+  1: You don't have one. You like to keep it mobile.
+  2: A booth in a local bar.
+  3: All Data Pool messages and anonymous dead drops.
+  4: Spare room in a warehouse, shop, or clinic.
+  5: An otherwise abandoned building.
+  6: The lobby of a cube hotel.
+
+Fixer Partner:
+  1: Family member
+  2: Old friend
+  3: Possible romantic partner as well
+  4: Mentor
+  5: Secret partner with mob/gang connections
+  6: Secret partner with Corporate connections
+
+Fixer Side Clients:
+  1: Local Rockerboys or Medias who use you to get them gigs or contacts.
+  2: Local gangers who also protect your work area or home.
+  3: Corporate Execs who use you for "black project" procurement work.
+  4: Local Solos or other combat types who use you to get them jobs or contacts.
+  5: Local Nomads and Fixers who use you to set up transactions or deals.
+  6: Local politicos or Execs who depend on you for finding out information.
+
+Fixer Gunner:
+  1: Combat Zone gangers who want you to work for them exclusively.
+  2: Rival Fixers trying to steal your clients.
+  3: Execs who want you to work for them exclusively.
+  4: Enemy of a former client who wants to clean up "loose ends"—like you.
+  5: Old client who thinks you screwed them over.
+  6: Rival Fixer trying to beat you out for resources and parts.
+
+Media Type:
+  1: Blogger
+  2: Writer (Books)
+  3: Videographer
+  4: Documentarian
+  5: Investigative Reporter
+  6: Street Scribe
+
+Media Source:
+  1: Monthly magazine
+  2: Blog
+  3: Mainstream vid feed
+  4: News channel
+  5: Book sales
+  6: Screamsheets
+
+Exec Type:
+  1: Financial
+  2: Media and Communications
+  3: Cybertech and Medical Technologies
+  4: Pharmaceuticals and Biotech
+  5: Food, Clothing, or other General Consumables
+  6: Energy Production
+  7: Personal Electronics and Robotics
+  8: Corporate Services
+  9: Consumer Services
+  10: Real Estate and Construction
+
+Exec Division:
+  1: Procurement
+  2: Manufacturing
+  3: Research and Development
+  4: Human Resources
+  5: Public Affairs/Publicity/Advertising
+  6: Mergers and Acquisitions
+
+Exec Good/Bad:
+  1: Always working for good, fully supporting ethical practices.
+  2: Operates as a fair and honest business all the time.
+  3: Will occasionally slip and do unethical things, but it's rare.
+  4: Willing to bend the rules to get what it needs.
+  5: Ruthless and profit-centered, willing to do some bad things.
+  6: Totally evil. Will engage in illegal, unethical business all the time.
+
+Exec Based:
+  1: One city
+  2: Several cities
+  3: Statewide
+  4: National
+  5: International, offices in a few major cities
+  6: International, offices everywher
+
+Exec Gunning:
+  1: Rival Corp in the same industry.
+  2: Law enforcement is watching you.
+  3: Local Media wants to bring you down.
+  4: Different divisions in your own company are feuding with each other.
+  5: Local government doesn't like your Corp.
+  6: International Corporations are eyeing you for a hostile takeover.
+
+Exec Boss:
+  1: Your Boss mentors you but watch out for their enemies.
+  2: Your Boss gives you a free hand and doesn't want to know what you're up to.
+  3: Your Boss is a micromanager who tries to meddle in your work.
+  4: Your Boss is a psycho whose unpredictable outbursts are offset by quiet paranoia.
+  5: Your Boss is cool and watches your back against rivals.
+  6: Your Boss is threatened by your meteoric rise and is planning to knife you.
+
+Rockerboy Type:
+  1: Musician
+  2: Slam Poet
+  3: Street Artist
+  4: Performance Artist
+  5: Comedian
+  6: Orator
+  7: Politico
+  8: Rap Artist
+  9: DJ
+  10: Idoru
+
+Rockerboy Perform:
+  1: Alternative Cafes
+  2: Private Clubs
+  3: Seedy Dive Bars
+  4: Guerrilla Performances
+  5: Nightclubs Around the City
+  6: On the Data Pool
+
+Rockerboy Leave:
+  1: You were a jerk and the rest of the group voted you out.
+  2: You got caught sleeping around with another member's mainline.
+  3: The rest of the group was killed in a tragic "accident."
+  4: The rest of the group was murdered or otherwise broken up by external enemies.
+  5: The group broke up over "creative differences."
+  6: You decided to go solo.
+
+Rockerboy Gunning:
+  1: Old group member who thinks you did them dirty.
+  2: Rival group or artist trying to steal market share.
+  3: Corporate enemies who don't like your message.
+  4: Critic or other "influencer" trying to bring you down.
+  5: Older media star who feels threatened by your rising fame.
+  6: Romantic interest or media figure who wants revenge for personal reasons.
