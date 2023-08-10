@@ -14,6 +14,7 @@ class Character:
     role: str
     sex: str
     tables: dict
+    class_name: str = None
     cultural_region: str = None
     language: str = None
     personality: str = None
@@ -36,6 +37,8 @@ class Character:
     message_role: str = ''
 
     def create(self, role: str) -> None:
+        self.class_name = role.capitalize()
+
         if self.name == None:
             if self.sex == 'female':
                 self.name = fake.name_female()
@@ -62,13 +65,27 @@ class Character:
         self.friends = self.get_friends_enemies_or_love(Friend)
         self.enemies = self.get_friends_enemies_or_love(Enemy)
         self.love = self.get_friends_enemies_or_love(Love)
-
-
+    # TODO: write docstrings for methods
     def from_table(self, attributes_names):
         for attribute_name in attributes_names:
             table_name = attribute_name.replace('_', ' ').title()
             self.__dict__[
                 attribute_name] = self.tables[table_name][dice.roll('1d10t')]
+
+    def get_table(self, keyword: str, dice_number: int) -> str:
+        """Finds corresponing table based on class name and given keyword
+        Args:
+            keyword (str): keyword that is second part of the table name
+            dice_number (int): number of sides of dice that is thrown on this table, usialy size of a table
+        Returns:
+            str: row from a table. number of which where rolled on the dice
+        """
+        if "/" in keyword:
+            keywords = keyword
+        else: # TODO: fix on a possibilty, not a very good decicion. Capitalize works wrong on word with "/"
+            keywords = " ".join([word.capitalize() for word in keyword.split(' ')])
+
+        return self.tables[self.class_name + ' ' + keywords][dice.roll(f'1d{int(dice_number)}t')]
 
     def cultural_origins(self):
         roll = dice.roll('1d10t')
@@ -115,6 +132,7 @@ class Character:
                 f'Enemies:\n{self.enemies}\n'
                 f'Love affairs:\n{self.love}'
                 )
+
         return message_first + self.message_role + message_person
 
 
@@ -180,19 +198,18 @@ class Fixer(Character):
     office: str = None
     clients: str = None
     gunning: str = None
-    # TODO all data from role tables must be a part of object for Fixer class
+
     def create(self, role: str) -> None:
         super().create(role)
-        class_name = str(__class__).split('.')[-1].capitalize()[:-2] #TODO replace table class name roll my parent class method
-        self.character_type = self.tables[class_name + ' Type'][dice.roll('1d10t')]
+        self.character_type = self.get_table('Type', 10)
 
-        if choice([0, 1]): # have partner
-            self.partner = self.tables[class_name + ' Partner'][dice.roll('1d6t')]
+        if choice([0, 1]): # have partner or not
+            self.partner = self.get_table('Partner', 6)
         partner_message = f"Partner: {self.partner}"
 
-        self.office = self.tables[class_name + ' Office'][dice.roll('1d6t')]
-        self.clients = self.tables['Fixer Side Clients'][dice.roll('1d6t')]
-        self.gunning = self.tables['Fixer Gunner'][dice.roll('1d6t')]
+        self.office = self.get_table('Office', 6)
+        self.clients = self.get_table('Side Clients', 6)
+        self.gunning = self.get_table('Gunner', 6)
 
         self.message_role = (f"{partner_message}\nOffice: {self.office}\n"
                             f"Clents: {self.clients}\n"
@@ -206,9 +223,8 @@ class Media(Character):
 
     def create(self, role: str) -> None:
         super().create(role)
-        class_name = str(__class__).split('.')[-1].capitalize()[:-2]
-        self.character_type = self.tables[class_name + ' Type'][dice.roll('1d6t')]
-        self.source = self.tables[class_name + ' Source'][dice.roll('1d6t')]
+        self.character_type = self.get_table('Type', 10)
+        self.source = self.get_table('Source', 6)
 
         self.message_role = f"{self.source}\n"
 
@@ -224,24 +240,24 @@ class Exec(Character):
 
     def create(self, role: str) -> None:
         super().create(role)
-        class_name = str(__class__).split('.')[-1].capitalize()[:-2]
-        self.character_type = self.tables[class_name + ' Type'][dice.roll('1d6t')]
+        self.character_type = self.get_table('Type', 10)
         division_roll = dice.roll('1d6t')
         if division_roll == 5:
-            temp = self.tables[class_name + ' Division'][division_roll]
+            temp = self.tables[self.class_name + ' Division'][division_roll]
             self.division = temp.split('/')[dice.roll('1d3t')-1]
         else:
-            self.division = self.tables[class_name + ' Division'][division_roll]
-        self.good_or_bad = self.tables[class_name + ' Good/Bad'][dice.roll('1d6t')]
-        self.based = self.tables[class_name + ' Based'][dice.roll('1d6t')]
-        self.gunning = self.tables[class_name + ' Gunning'][dice.roll('1d6t')]
-        self.boss = self.tables[class_name + ' Boss'][dice.roll('1d6t')]
+            self.division = self.tables[self.class_name + ' Division'][division_roll]
 
-        self.message_role = (f"Works for '{self.character_type}'",
-        f" corporation wich is '{self.good_or_bad[:-1].lower()}'",
-        f" located in {self.based.lower()}",
-        f" in {self.division} division.\n",
-        f"Gunning: { self.gunning}\n",
+        self.good_or_bad = self.get_table('Good/Bad', 6)
+        self.based = self.get_table('Based', 6)
+        self.gunning = self.get_table('Gunning', 6)
+        self.boss = self.get_table('Boss', 6)
+
+        self.message_role = (f"Works for '{self.character_type}'"
+        f" corporation wich is '{self.good_or_bad[:-1].lower()}'"
+        f" located in {self.based.lower()}"
+        f" in {self.division} division.\n"
+        f"Gunning: { self.gunning}\n"
         f"{self.boss}\n")
 
 
@@ -256,26 +272,32 @@ class Rockerboy(Character):
 
     def create(self, role: str) -> None:
         super().create(role)
-        class_name = str(__class__).split('.')[-1].capitalize()[:-2]
-        self.character_type = self.tables[class_name + ' Type'][dice.roll('1d10t')]
+        self.character_type = self.get_table('Type', 10)
         self.in_group = choice([True, False])
 
         if self.in_group == False:
             self.were_in_group = choice([True, False])
             if self.were_in_group == True:
-                self.leave = self.tables[class_name + ' Leave'][dice.roll('1d6t')]
+                self.leave = self.get_table('Leave', 6)
 
-        self.perform = self.tables[class_name + ' Perform'][dice.roll('1d6t')]
-        self.gunning = self.tables[class_name + ' Gunning'][dice.roll('1d6t')]
+        self.perform = self.get_table('Perform', 6)
+        self.gunning = self.get_table('Gunning', 10)
 
         self.message_role = (f"{'Perform alone' if self.in_group else 'Perform in group'}."
             f"{f' Where in a group but, {self.leave.lower()}' if self.were_in_group else ''}\n"
             f"Perform in {self.perform.lower()}\n"
-            f"{self.gunning}\n"
+            f"Gunning {self.gunning}\n"
             )
 
-
 # TODO: Solo class
+# @dataclass
+# class Solo(Character):
+#     character_type: str = None
+
+#     def create(self, role: str) -> None:
+#         super().create(role)
+
+
 # TODO: Netrunner class
 # TODO: Tech class
 # TODO: Medtech class
