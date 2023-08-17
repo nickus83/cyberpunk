@@ -42,8 +42,10 @@ class Character:
         if self.name == None:
             if self.sex == 'female':
                 self.name = fake.name_female()
+                self.appeal = 'she'
             else: # TODO: name dependency from cultiral origins
                 self.name = fake.name_male()
+                self.appeal = 'he' # TODO check for appeal he/she in message roles
 
         self.cultural_region, self.language = self.cultural_origins()
 
@@ -86,6 +88,10 @@ class Character:
             keywords = " ".join([word.capitalize() for word in keyword.split(' ')])
 
         return self.tables[self.class_name + ' ' + keywords][dice.roll(f'1d{int(dice_number)}t')]
+
+    @staticmethod # TODO check for lower first letter in other places
+    def lower_first(input: str) -> str:
+        return input[0].lower() + input[1:]
 
     def cultural_origins(self):
         roll = dice.roll('1d10t')
@@ -289,14 +295,35 @@ class Rockerboy(Character):
             f"Gunning {self.gunning}\n"
             )
 
-# TODO: Solo class
-# @dataclass
-# class Solo(Character):
-#     character_type: str = None
 
-#     def create(self, role: str) -> None:
-#         super().create(role)
+@dataclass
+class Solo(Character):
+    character_type: str = None
+    moral_compass: str = None
+    operational_territory: str = None
+    gunning: str = None # TODO check for gunning for other classes. gunning is who hunts the character
 
+    def create(self, role: str) -> None:
+        super().create(role)
+        self.character_type = self.get_table('Type', 6)
+        if '/' in self.character_type:
+            temp = []
+            for word in self.character_type.split(' '):
+                if '/' in word:
+                    word = choice(word.split('/'))
+
+                temp.append(word)
+
+            self.character_type = " ".join(temp)
+
+        self.moral_compass = self.get_table('Moral Compass', 6)
+        self.operational_territory = self.get_table('Operational Territory', 6)
+        self.gunning = self.get_table('Gunning', 6)
+
+        self.message_role = (f"{self.moral_compass.replace('You', self.appeal.capitalize()).replace('you', self.appeal)}\n"
+                            f"Works in {self.lower_first(self.operational_territory)}.\n"
+                            f"{self.gunning} is after {'him' if self.sex == 'male' else 'her'}.\n"
+            )
 
 # TODO: Netrunner class
 # TODO: Tech class
@@ -312,7 +339,7 @@ def main(name, role, sex, tables_path):
 
     message = f"No such role '{role}'. Choose from {[i for i in tables['roles']]}"
     assert role.capitalize() in tables['roles'], message
-
+    # TODO: write tests for varios classes
     if not sex:
         sex = choice(['male', 'female'])
 
