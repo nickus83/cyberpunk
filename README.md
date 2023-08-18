@@ -4,7 +4,7 @@ This project generates randomly character features included personal life goals,
 
 This project currently includes classes for Fixer, Media, Exec, Rockerboy, Solo and Netrunner classes. Not included (for now) their associated abilities and equipment. Please feel free to use this project for your own tabletop games or as a reference for learning about character creation in Cyberpunk Red.
 
-Please note that the Solo, Netrunner, Tech, Medtech, Lawmen and Nomad class has not yet been implemented, but may be added in the future. Additionally, any feedback or contributions to this project are greatly appreciated.
+Please note that the Tech, Medtech, Lawmen and Nomad class has not yet been implemented, but may be added in the future. Additionally, any feedback or contributions to this project are greatly appreciated.
 
 Thank you for checking out my project, and happy gaming!
 
