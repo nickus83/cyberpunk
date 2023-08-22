@@ -333,7 +333,7 @@ class Netrunner(Character):
     partner: str = None
     workspace: str = None
     clients: str = None
-    get_programs: str = None
+    supplies: str = None
     gunning: str = None
 
     def create(self, role: str) -> None:
@@ -344,13 +344,13 @@ class Netrunner(Character):
             self.partner = self.get_table('Partner', 6)
         self.workspace = self.get_table('Workspace', 6)
         self.clients = self.get_table('Clients', 6)
-        self.get_programs = self. get_table('Get Programs', 6)
+        self.supplies = self. get_table('Supplies', 6)
         self. gunning = self.get_table('Gunning', 6)
 
         self.message_role = (f"Works {'alone.' if self.alone else 'with partner, a ' + self.lower_first(self.partner)}\n"
                             f"Workspace: {self.workspace}\n"
                             f"Clients: {self.clients}.\n"
-                            f"How get programs - {self.lower_first(self.get_programs).replace('You', self.appeal).replace('you', self.appeal)}\n"
+                            f"How get programs - {self.lower_first(self.supplies).replace('You', self.appeal).replace('you', self.appeal)}\n"
                             f"May harm {'him' if self.sex == 'male' else 'her'} {self.lower_first(self.gunning)}\n"
                             )
 
@@ -384,7 +384,33 @@ class Tech(Character):
                             f"Gunning: {self.gunning.replace('you', self.appeal)}\n"
                             )
 
-# TODO: Medtech class
+
+@dataclass
+class Medtech(Character):
+    character_type: str = None #TODO: move all deafult fields to parent class
+    alone: bool = None
+    partner: str =  None
+    workspace: str = None
+    clients: str = None
+    supplies: str = None
+
+    def create(self, role: str) -> None:
+        super().create(role)
+        self.character_type = self.get_table('Type', 10)
+        self.alone = choice([True, False])
+        if not self.alone:
+            self.partner = self.get_table('Partner', 6)
+        self.workspace = self.get_table('Workspace', 6)
+        self.clients = self.get_table('Clients', 6)
+        self.supplies = self.get_table('Supplies', 6)
+
+        self.message_role = (f"Works {'alone' if self.alone else 'with partner ' + self.lower_first(self.partner)}.\n"
+                        f"Workspace: {self.workspace}\n"
+                        f"Clients: {self.clients}\n"
+                        f"Supplies: {self.supplies}\n"
+                        )
+
+
 # TODO: Lawmen class
 # TODO: Nomad class
 
