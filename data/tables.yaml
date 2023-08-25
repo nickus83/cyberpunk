@@ -6,7 +6,7 @@ roles:
 - Medtech
 - Media
 - Exec
-- Lawmen
+- Lawman
 - Fixer
 - Nomad
 
@@ -581,3 +581,43 @@ Medtech Supplies:
   4: Corporate Execs or Trauma Team supply you with stuff in exchange for your services.
   5: You have a backdoor into a few Corporate or Hospital warehouses.
   6: You hit the Night Markets and score deals whenever you can.
+
+Lawman Type:
+  1: Guard
+  2: Standard Beat or Patrol
+  3: Criminal Investigation
+  4: Special Weapons and Tactics
+  5: Motor Patrol
+  6: Internal Affairs
+
+Lawman Jurisdiction:
+  1: Corporate Zones
+  2: Standard City Patrol Zone
+  3: Combat Zones
+  4: Outer City
+  5: Recovery Zones
+  6: Open Highways
+
+Lawman Corrupt:
+  1: Fair, honest policing, strong ethical practices.
+  2: Fair and honest policing, but hard on lawbreakers.
+  3: Will occasionally slip and do unethical things, but it's rare.
+  4: Willing to bend any rules to get the bad guys.
+  5: Ruthless and determined to control The Street, even if it means breaking the law.
+  6: Totally corrupt. You take bribes, engage in illegal, and unethical business all the time.
+
+Lawman Gunning:
+  1: Organized Crime
+  2: Boostergangs
+  3: Police Accountability Group
+  4: Dirty Politicians
+  5: Smugglers
+  6: Street Criminals
+
+Lawman Target:
+  1: Organized Crime
+  2: Boostergangs
+  3: Drug Runners
+  4: Dirty Politicians
+  5: Smugglers
+  6: Street Crime

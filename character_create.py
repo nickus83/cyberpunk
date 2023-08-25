@@ -68,11 +68,10 @@ class Character:
         self.enemies = self.get_friends_enemies_or_love(Enemy)
         self.love = self.get_friends_enemies_or_love(Love)
     # TODO: write docstrings for methods
-    def from_table(self, attributes_names):
+    def from_table(self, attributes_names: list) -> None:
         for attribute_name in attributes_names:
             table_name = attribute_name.replace('_', ' ').title()
-            self.__dict__[
-                attribute_name] = self.tables[table_name][dice.roll('1d10t')]
+            self.__dict__[attribute_name] = self.tables[table_name][dice.roll('1d10t')]
 
     def get_table(self, keyword: str, dice_number: int) -> str:
         """Finds corresponing table based on class name and given keyword
@@ -411,7 +410,30 @@ class Medtech(Character):
                         )
 
 
-# TODO: Lawmen class
+@dataclass
+class Lawman(Character):
+    character_type: str = None # other attributes is unique
+    jurisdiction: str = None
+    corrupt: str = None
+    gunning: str = None
+    target: str = None
+
+    def create(self, role: str) -> None:
+        super().create(role)
+        self.character_type = self.get_table('Type', 6)
+        self.jurisdiction = self.get_table('Jurisdiction', 6)
+        self.corrupt = self.get_table('Corrupt', 6)
+        self.gunning = self.get_table('Gunning', 6)
+        self.target = self.get_table('Target', 6)
+
+        self.message_role = (f"Works in {self.jurisdiction}.\n"
+                             f"{self.corrupt}\n"
+                             f"{self.gunning} is after {'him' if self.sex=='male' else 'her'}.\n"
+                             f"{self.target} is {'his' if self.sex=='male' else 'her'} main target.\n"
+                             )
+
+
+
 # TODO: Nomad class
 
 def main(name, role, sex, tables_path):
