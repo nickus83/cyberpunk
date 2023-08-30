@@ -318,6 +318,22 @@ Media Source:
   5: Book sales
   6: Screamsheets
 
+Media Ethics:
+  1: Fair, honest reporting, strong ethical practices. You only report the verifiable truth.
+  2: Fair and honest reporting, but willing to go on hearsay and rumor if that's what it takes.
+  3: Will occasionally slip and do unethical things, but it's rare. You have some standards.
+  4: Willing to bend any rules to get the bad guys. But only the bad guys.
+  5: Ruthless and determined to make it big, even if it means breaking the law. You're a muckraker.
+  6: Totally corrupt. You take bribes, engage in illegal, unethical reporting all the time. Your pen is for hire to the highest bidder.
+
+Media Stories:
+  1: Political Intrigue
+  2: Ecological Impact
+  3: Celebrity News
+  4: Corporate Takedowns
+  5: Editorials
+  6: Propaganda
+
 Exec Type:
   1: Financial
   2: Media and Communications

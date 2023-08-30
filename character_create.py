@@ -69,6 +69,11 @@ class Character:
         self.love = self.get_friends_enemies_or_love(Love)
     # TODO: write docstrings for methods
     def from_table(self, attributes_names: list) -> None:
+        """Convert a list of names to attributes leading to correstonding tables
+
+        Args:
+            attributes_names (list): list of names that will be the attributes
+        """
         for attribute_name in attributes_names:
             table_name = attribute_name.replace('_', ' ').title()
             self.__dict__[attribute_name] = self.tables[table_name][dice.roll('1d10t')]
@@ -205,7 +210,7 @@ class Fixer(Character):
     gunning: str = None
 
     def create(self, role: str) -> None:
-        super().create(role)
+        super().create(role) # TODO: check this is nessesary or not
         self.character_type = self.get_table('Type', 10)
 
         if choice([0, 1]): # have partner or not
@@ -224,14 +229,20 @@ class Fixer(Character):
 @dataclass
 class Media(Character):
     character_type: str = None
-    source: int = None
+    source: str = None
+    ethics: str = None
+    stories: str = None
 
     def create(self, role: str) -> None:
         super().create(role)
-        self.character_type = self.get_table('Type', 10)
+        self.character_type = self.get_table('Type', 6)
         self.source = self.get_table('Source', 6)
+        self.ethics = self.get_table('Ethics', 6)
+        self.stories = self.get_table('Stories', 6)
 
-        self.message_role = f"{self.source}\n"
+        self.message_role = (f"Works in {self.lower_first(self.source)}. Write about {self.stories.lower()}.\n"
+                             f"{self.ethics.replace('You', self.appeal.capitalize())}\n"
+                             )
 
 
 @dataclass
