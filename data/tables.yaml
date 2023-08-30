@@ -143,7 +143,7 @@ Family Background:
   2: ['Corporate Managers', 'Well to do, with large homes, safe neighborhoods, nice cars, etc. Sometimes your parent(s) would hire servants, although this was rare. You had a mix of private and corporate education.']
   3: ['Corporate Technicians', 'Middle-middle class, with comfortable conapts or Beaverville suburban homes, minivans and corporate-run technical schools. Kind of like living 1950s America crossed with 1984.']
   4: ['Nomad Pack', 'You had a mix of rugged trailers, vehicles, and huge road kombis for your home. You learned to drive and fight at an early age, but the family was always there to care for you. Food was actually fresh and abundant. Mostly home schooled.']
-  5: ['Ganger"s', 'A savage, violent home in any place the gang could take over. You were usually hungry, cold, and scared. You probably did not know who your actual parents were. Education? The Gang taught you how to fight, kill, and steal—what else did you need to know?']
+  5: ['Ganger"s', 'A savage, violent home in any place the gang could take over. You were usually hungry, cold, and scared. You probably did not know who your actual parents were. Education? The Gang taught you how to fight, kill, and steal what else did you need to know?']
   6: ['Combat Zoners', 'A step up from a gang "family," your home was a decaying building somewhere in the "Zone", heavily fortified. You were hungry at times, but regularly could score a bed and a meal. Home schooled.']
   7: ['Urban Homeless', 'You lived in cars, dumpsters, or abandoned shipping modules. If you were lucky. You were usually hungry, cold, and scared, unless you were tough enough to fight for the scraps. Education? School of Hard Knocks.']
   8: ['Megastructure Warren Rats', 'You grew up in one of the huge new megastructures that went up after the War. A tiny conapt, kibble and scop for food, a mostly warm bed. Some better educated adult warren dwellers or a local Corporation may have set up a school.']
@@ -621,3 +621,63 @@ Lawman Target:
   4: Dirty Politicians
   5: Smugglers
   6: Street Crime
+
+Nomad Pack Size:
+  1: A single extended tribe or family
+  2: A couple dozen members
+  3: Forty or fifty members
+  4: A hundred or more members
+  5: A Blood Family (hundreds of members)
+  6: An Affiliated Family (made of several Blood Families)
+
+Nomad Land:
+  1: Gogang
+  2: Passenger transport
+  3: Chautauqua/school
+  4: Traveling show/carnival
+  5: Migrant farmers
+  6: Cargo transport
+  7: Shipment protection
+  8: Smuggling
+  9: Mercenary army
+  10: Construction work gang
+
+Nomad Air:
+  1: Air piracy
+  2: Cargo transport
+  3: Passenger transport
+  4: Aircraft protection
+  5: Smuggling
+  6: Combat support
+
+Nomad Sea:
+  1: Piracy
+  2: Cargo transport
+  3: Passenger transport
+  4: Smuggling
+  5: Combat support
+  6: Submarine warfare
+
+Nomad Role:
+  1: Scout (negotiator)
+  2: Outrider (protection, weapons)
+  3: Transport pilot/driver
+  4: Loadmaster (large cargo mover, trucker)
+  5: Solo smuggler
+  6: Procurement (fuel, vehicles, etc.)
+
+Nomad Pack Philosophy:
+  1: Always working for good; your Pack accepts others, just wants to get along.
+  2: It's more like a family business. Operates as a fair and honest concern.
+  3: Will occasionally slip and do unethical things, but it's rare.
+  4: Willing to bend the rules whenever they get in the way to get what the Pack needs.
+  5: Ruthless and self-centered, willing to do some bad things if it will get the Pack ahead.
+  6: Totally evil. You rage up and down the highways, killing, looting, and just terrorizing everyone.
+
+Nomad Pack Gunning:
+  1: Organized Crime
+  2: Boostergangs
+  3: Drug Runners
+  4: Dirty Politicians
+  5: Rival Packs in the same businesses
+  6: Dirty Cops

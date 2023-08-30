@@ -433,8 +433,40 @@ class Lawman(Character):
                              )
 
 
+@dataclass
+class Nomad(Character):
+    character_type: str = ''
+    pack_size: str = None
+    pack_type: str = None
+    pack_do: str = None
+    pack_role: str = None
+    pack_philosophy: str = None
+    pack_gunning: str = None
 
-# TODO: Nomad class
+    def create(self, role: str) -> None:
+        super().create(role)
+        self.pack_size = self.get_table('Pack Size', 6)
+
+        self.pack_type = choice(['land', 'air', 'sea'])
+        if self.pack_type == 'land':
+            self.pack_do = self.get_table('Land', 10)
+        elif self.pack_type == 'air':
+            self.pack_do = self.get_table('Air', 6)
+        elif self.pack_type == 'sea':
+            self.pack_do = self.get_table('Sea', 6)
+
+        self.pack_role = self.get_table('Role', 6)
+        self.pack_philosophy = self.get_table('Pack Philosophy', 6)
+        self.pack_gunning = self.get_table('Pack Gunning', 6)
+
+        self.message_role = (f"Pack size: {self.pack_size}.\n"
+                             f"Pack operates on {self.pack_type}.\n"
+                             f"Pack doing a {self.lower_first(self.pack_do)}.\n"
+                             f"{self.pack_philosophy}\n"
+                             f"{self.pack_gunning} is after pack.\n"
+                             f"{'his'.capitalize() if self.sex=='male' else 'her'.capitalize()} role is {self.pack_role}.\n"
+                             )
+
 
 def main(name, role, sex, tables_path):
     # TODO: fix random seed
