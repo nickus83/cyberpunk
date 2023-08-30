@@ -223,7 +223,7 @@ class Fixer(Character):
 
         self.message_role = (f"{partner_message}\nOffice: {self.office}\n"
                             f"Clents: {self.clients}\n"
-                            f"Gunning for you: {self.gunning}\n")
+                            f"Gunning: {self.gunning}\n")
 
 
 @dataclass
