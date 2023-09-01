@@ -37,6 +37,13 @@ class Character:
     message_role: str = ''
 
     def create(self, role: str) -> None:
+        """Main create functions. Generates character role attributes
+            based on given role and corresponding tables.
+            This method (and class) is abstract  dont't create this object/
+
+        Args:
+            role (str): name of a role
+        """
         self.class_name = role.capitalize()
 
         if self.name == None:
@@ -95,7 +102,7 @@ class Character:
 
         return self.tables[self.class_name + ' ' + keywords][dice.roll(f'1d{int(dice_number)}t')]
 
-    @staticmethod # TODO check for lower first letter in other places
+    @staticmethod
     def lower_first(input: str) -> str:
         return input[0].lower() + input[1:]
 
@@ -268,11 +275,11 @@ class Exec(Character):
         self.boss = self.get_table('Boss', 6)
 
         self.message_role = (f"Works for '{self.character_type}'"
-        f" corporation wich is '{self.good_or_bad[:-1].lower()}'"
-        f" located in {self.based.lower()}"
-        f" in {self.division} division.\n"
-        f"Gunning: { self.gunning}\n"
-        f"{self.boss}\n")
+                            f" corporation wich is '{self.good_or_bad[:-1].lower()}'"
+                            f" located in {self.based.lower()}"
+                            f" in {self.division} division.\n"
+                            f"Gunning: { self.gunning}\n"
+                            f"{self.boss}\n")
 
 
 @dataclass
@@ -298,10 +305,10 @@ class Rockerboy(Character):
         self.gunning = self.get_table('Gunning', 6)
 
         self.message_role = (f"{'Perform alone' if self.in_group else 'Perform in group'}."
-            f"{f' Where in a group but, {self.leave.lower()}' if self.were_in_group else ''}\n"
-            f"Perform in {self.perform.lower()}\n"
-            f"Gunning {self.gunning}\n"
-            )
+                            f"{f' Where in a group but, {self.leave.lower()}' if self.were_in_group else ''}\n"
+                            f"Perform in {self.perform.lower()}\n"
+                            f"Gunning {self.gunning}\n"
+                            )
 
 
 @dataclass
@@ -330,7 +337,7 @@ class Solo(Character):
 
         self.message_role = (f"{self.moral_compass.replace('You', self.appeal.capitalize()).replace('you', self.appeal)}\n"
                             f"Works in {self.lower_first(self.operational_territory)}.\n"
-                            f"{self.gunning} is after {'him' if self.sex == 'male' else 'her'}.\n"
+                            f"{self.gunning} is after {self.appeal_other}.\n"
             )
 
 
