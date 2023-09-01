@@ -117,27 +117,23 @@ class Character:
         return result
 
     def __str__(self):
-        # calling = 'He' if self.sex == 'male' else 'She'
-        # calling_other = "His" if self.sex == 'male' else 'Her'
 
-        def lowfirst(s): return s[:1].lower() + s[1:] if s else ''
-        family_crisis = lowfirst(self.family_crisis).replace(
-            'your', lowfirst(self.appeal_other))
-        family_crisis = family_crisis.replace('you', lowfirst(self.appeal_other))
+        family_crisis = self.lower_first(self.family_crisis).replace('your', self.appeal_other)
+        family_crisis = family_crisis.replace('you', self.appeal_other)
 
         message_first = (f'Name: {self.name} ({self.sex})\n'
                     f'Role: {self.role.capitalize()}. {self.character_type}\n')
         message_person = (f'Person:\n'
-                f'{self.appeal} is from {self.cultural_region} region. Speaks {self.language}.\n'
-                f'{self.appeal} is {lowfirst(self.personality)}.\n'
-                f'{self.appeal} is wearing {self.clothing_style}.\n'
-                f'{self.appeal_other} hairstyle is {lowfirst(self.hairstyle)}. {self.appeal_other} affectation is {lowfirst(self.affectation)}.\n'
-                f'{self.appeal} is value {lowfirst(self.motivation)} the most. {self.appeal} feels about others "{self.relationships}".\n'
-                f'{self.most_valued_person} is {lowfirst(self.appeal_other)} most valued person.\n'
-                f'{self.appeal_other} {self.most_valued_possession[2:]} is most valued possession.\n'
-                f'Family:\n{self.appeal} is from {self.family_background[0]} family.\n'
+                f'{self.appeal.capitalize()} is from {self.cultural_region} region. Speaks {self.language}.\n'
+                f'{self.appeal.capitalize()} is {self.lower_first(self.personality)}.\n'
+                f'{self.appeal.capitalize()} is wearing {self.clothing_style}.\n'
+                f'{self.appeal_other.capitalize()} hairstyle is {self.lower_first(self.hairstyle)}. {self.appeal_other} affectation is {self.lower_first(self.affectation)}.\n'
+                f'{self.appeal.capitalize()} is value {self.lower_first(self.motivation)} the most. {self.appeal} feels about others "{self.relationships}".\n'
+                f'{self.most_valued_person} is {self.lower_first(self.appeal_other)} most valued person.\n'
+                f'{self.appeal_other.capitalize()} {self.most_valued_possession[2:]} is most valued possession.\n'
+                f'Family:\n{self.appeal.capitalize()} is from {self.family_background[0]} family.\n'
                 f'"{self.family_background[1]}"\n'
-                f'{self.appeal} where spend {lowfirst(self.appeal_other)} childhood {lowfirst(self.childhood_environment)}\n'
+                f'{self.appeal.capitalize()} where spend {self.lower_first(self.appeal_other)} childhood {self.lower_first(self.childhood_environment)}\n'
                 f'But {family_crisis}\n'
                 f'Life goals: {self.life_goals}\n'
                 f'Friends:\n{self.friends}\n'
