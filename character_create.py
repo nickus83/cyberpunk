@@ -227,8 +227,8 @@ class Fixer(Character):
         self.gunning = self.get_table('Gunner', 6)
 
         self.message_role = (f"{partner_message}\nOffice: {self.office}\n"
-                            f"Clents: {self.clients}\n"
-                            f"Gunning: {self.gunning}\n")
+                            f"Clents: {self.clients.replace('you', self.appeal_other)}\n"
+                            f"Gunning: {self.gunning.replace('you', self.appeal_other)}\n")
 
 
 @dataclass
@@ -278,8 +278,8 @@ class Exec(Character):
                             f" corporation wich is '{self.good_or_bad[:-1].lower()}'"
                             f" located in {self.based.lower()}"
                             f" in {self.division} division.\n"
-                            f"Gunning: { self.gunning}\n"
-                            f"{self.boss}\n")
+                            f"Gunning: { self.gunning.replace('you', self.appeal_other)}\n"
+                            f"{self.boss.replace('Your', self.appeal_other.capitalize()).replace('your', self.appeal_other).replace('you', self.appeal_other)}\n")
 
 
 @dataclass
@@ -304,10 +304,12 @@ class Rockerboy(Character):
         self.perform = self.get_table('Perform', 6)
         self.gunning = self.get_table('Gunning', 6)
 
+        if self.leave:
+            temp_leave = self.leave.replace('''you''', self.appeal).replace('''You''', self.appeal).lower()
         self.message_role = (f"{'Perform alone' if self.in_group else 'Perform in group'}."
-                            f"{f' Where in a group but, {self.leave.lower()}' if self.were_in_group else ''}\n"
+                            f"{f' Where in a group but, {temp_leave}' if self.were_in_group else ''}\n"
                             f"Perform in {self.perform.lower()}\n"
-                            f"Gunning {self.gunning}\n"
+                            f"Gunning {self.gunning.replace('you', self.appeal_other)}\n"
                             )
 
 
@@ -335,9 +337,9 @@ class Solo(Character):
         self.operational_territory = self.get_table('Operational Territory', 6)
         self.gunning = self.get_table('Gunning', 6)
 
-        self.message_role = (f"{self.moral_compass.replace('You', self.appeal.capitalize()).replace('you', self.appeal)}\n"
-                            f"Works in {self.lower_first(self.operational_territory)}.\n"
-                            f"{self.gunning} is after {self.appeal_other}.\n"
+        self.message_role = (f"{self.moral_compass.replace('You', self.appeal_other.capitalize()).replace('you', self.appeal_other)}\n"
+                            f"Works in {self.lower_first(self.operational_territory.replace('you', self.appeal_other))}.\n"
+                            f"{self.gunning.replace('you', self.appeal_other)} is after {self.appeal_other}.\n"
             )
 
 
@@ -364,9 +366,9 @@ class Netrunner(Character):
 
         self.message_role = (f"Works {'alone.' if self.alone else 'with partner, a ' + self.lower_first(self.partner)}\n"
                             f"Workspace: {self.workspace}\n"
-                            f"Clients: {self.clients}.\n"
-                            f"How get programs - {self.lower_first(self.supplies).replace('You', self.appeal).replace('you', self.appeal)}\n"
-                            f"May harm {'him' if self.sex == 'male' else 'her'} {self.lower_first(self.gunning)}\n"
+                            f"Clients: {self.clients.replace('your', self.appeal_other).replace('you', self.appeal_other).replace('You', self.appeal_other.capitalize())}\n"
+                            f"How get programs - {self.lower_first(self.supplies.replace('you', self.appeal_other)).replace('You', self.appeal_other.capitalize())}\n"
+                            f"May harm {self.appeal_other} {self.lower_first(self.gunning.replace('you', self.appeal_other)).replace('You', self.appeal_other.capitalize())}\n"
                             )
 
 
@@ -393,10 +395,10 @@ class Tech(Character):
         self.gunning = self.get_table('Gunning', 6)
 
         self.message_role = (f"Works {'alone' if self.alone else 'with partner ' + self.lower_first(self.partner)}.\n"
-                            f"Workspace: {self.workspace}\n"
-                            f"Clients: {self.clients}\n"
+                            f"Workspace: {self.workspace.replace('you', self.appeal)}\n"
+                            f"Clients: {self.clients.replace('you', self.appeal_other).replace('You', self.appeal_other.capitalize())}\n"
                             f"{self.appeal.capitalize()} {self.lower_first(self.supplies).replace('You', '').replace('you', self.appeal)}\n"
-                            f"Gunning: {self.gunning.replace('you', self.appeal)}\n"
+                            f"Gunning: {self.gunning.replace('you', self.appeal_other).replace('You', self.appeal_other.capitalize())}\n"
                             )
 
 
@@ -520,5 +522,6 @@ if __name__ == '__main__':
     parse.add_argument('-t', '--tables-path', default='data/tables.yaml',
                        type=Path, help='relative path to tables yaml file, data/tables.yaml as default')
     args = parse.parse_args()
+
 
     main(**vars(args))
