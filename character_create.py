@@ -487,9 +487,21 @@ class Nomad(Character):
 
 
 def main(name, role, sex, tables_path):
+    """
+    Generate the main character of the game based on the given name, role, sex, and tables path.
+
+    Args:
+        name (str): The name of the character.
+        role (str): The role of the character. If not provided, a random role will be chosen from the available roles.
+        sex (str): The sex of the character. If not provided, a random sex will be chosen.
+        tables_path (str): The path to the tables file.
+
+    Returns:
+        None
+    """
     # TODO: fix random seed
     # TODO: fix faker seed
-    with open(Path.cwd() / tables_path) as fo:
+    with open(Path(__file__).parent.resolve() / tables_path) as fo:
         tables = yaml.safe_load(fo)
 
     if not role:
