@@ -1,12 +1,13 @@
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from random import choice
-import re
 from typing import Tuple
 
 import dice
 import yaml
 from faker import Faker
+
 fake = Faker()
 
 @dataclass
@@ -77,7 +78,7 @@ class Character:
         self.friends = self.get_friends_enemies_or_love(Friend)
         self.enemies = self.get_friends_enemies_or_love(Enemy)
         self.love = self.get_friends_enemies_or_love(Love)
-    # TODO: write docstrings for methods
+
     def from_table(self, attributes_names: list) -> None:
         """Convert a list of names to attributes leading to correstonding tables
 
@@ -117,6 +118,11 @@ class Character:
         return input[0].lower() + input[1:]
 
     def cultural_origins(self) -> Tuple[str, str]:
+        """
+        Get a random cultural origin and language.
+        Returns:
+            Tuple[str, str]: A tuple containing the cultural region and language.
+        """
         roll = dice.roll('1d10t')
         region = self.tables['Cultural Origins'][roll]['Cultural Region']
 
@@ -128,22 +134,40 @@ class Character:
         return (region, language)
 
     def get_friends_enemies_or_love(self, class_name):
+        """
+        Generate a list of instances of the given class name.
+
+        Args:
+            class_name (class): The name of the class to instantiate.
+
+        Returns:
+            list: A list of instances of the given class name.
+        """
         result = []
 
+        # Generate a random number between 0 and 3.
+        # If the result of the dice roll is less than or equal to 7, set the number to 0.
+        # Otherwise, subtract 7 from the dice roll result.
         number = max(0, dice.roll('1d10t') - 7)
+
+        # Instantiate the given class name `number` times and append the instances to the result list.
         for _ in range(number):
             result.append(class_name(self.tables))
+
         return result
 
     def __str__(self):
+        # Generate the crisis description based on the family crisis and appeal_other
         crisis = self.lower_first(self.family_crisis).replace('your', self.appeal_other)
         crisis = crisis.replace('you', self.appeal_other)
 
+        # Generate the first part of the message including name, sex, role, and character type
         message_first = (
             f'Name: {self.name} ({self.sex})\n'
             f'Role: {self.role.capitalize()}. {self.character_type}\n'
         )
 
+        # Generate the description of the person including appeal, cultural region, language, personality, etc.
         message_person = (
             f'Person:\n'
             f'{self.appeal.capitalize()} is from {self.cultural_region} region. Speaks {self.language}.\n'
@@ -167,6 +191,7 @@ class Character:
             f'Love affairs:\n{self.love}'
         )
 
+        # Combine all the parts of the message and return it
         return message_first + self.message_role + message_person
 
 
