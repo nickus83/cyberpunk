@@ -266,20 +266,31 @@ class Fixer(Character):
     gunning: str = None
 
     def create(self, role: str) -> None:
-        super().create(role) # TODO: check this is nessesary or not
+        # Call the parent class method to create the role
+        super().create(role)
+
+        # Set the character type using the 'Type' table
         self.character_type = self.get_table('Type', 10)
 
-        if choice([0, 1]): # have partner or not
+        # Determine if the character has a partner or not
+        if choice([0, 1]):
             self.partner = self.get_table('Partner', 6)
-        partner_message = f"Partner: {self.partner}"
 
+        # Create a message with the partner information
+        partner_message = f"Partner: {self.partner}" if self.partner else ""
+
+        # Set the office, clients, and gunning attributes using their respective tables
         self.office = self.get_table('Office', 6)
         self.clients = self.get_table('Side Clients', 6)
         self.gunning = self.get_table('Gunner', 6)
 
-        self.message_role = (f"{partner_message}\nOffice: {self.office}\n"
-                            f"Clents: {self.clients.replace('you', self.appeal_other)}\n"
-                            f"Gunning: {self.gunning.replace('you', self.appeal_other)}\n")
+        # Create the final message with all the information
+        self.message_role = (
+            f"{partner_message}\n"
+            f"Office: {self.office}\n"
+            f"Clients: {self.clients.replace('you', self.appeal_other)}\n"
+            f"Gunning: {self.gunning.replace('you', self.appeal_other)}\n"
+    )
 
 
 @dataclass
