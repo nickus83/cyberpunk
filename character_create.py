@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from random import choice
 import re
+from typing import Tuple
 
 import dice
 import yaml
@@ -104,11 +105,22 @@ class Character:
 
     @staticmethod
     def lower_first(input: str) -> str:
+        """
+        Convert the first character of a string to lowercase.
+
+        Args:
+            input (str): The string to convert.
+
+        Returns:
+            str: The converted string.
+        """
         return input[0].lower() + input[1:]
 
-    def cultural_origins(self):
+    def cultural_origins(self) -> Tuple[str, str]:
         roll = dice.roll('1d10t')
         region = self.tables['Cultural Origins'][roll]['Cultural Region']
+
+        # If the region contains multiple options, choose one randomly
         if '/' in region:
             region = choice(region.split('/'))
 
@@ -124,29 +136,36 @@ class Character:
         return result
 
     def __str__(self):
+        crisis = self.lower_first(self.family_crisis).replace('your', self.appeal_other)
+        crisis = crisis.replace('you', self.appeal_other)
 
-        family_crisis = self.lower_first(self.family_crisis).replace('your', self.appeal_other)
-        family_crisis = family_crisis.replace('you', self.appeal_other)
+        message_first = (
+            f'Name: {self.name} ({self.sex})\n'
+            f'Role: {self.role.capitalize()}. {self.character_type}\n'
+        )
 
-        message_first = (f'Name: {self.name} ({self.sex})\n'
-                    f'Role: {self.role.capitalize()}. {self.character_type}\n')
-        message_person = (f'Person:\n'
-                f'{self.appeal.capitalize()} is from {self.cultural_region} region. Speaks {self.language}.\n'
-                f'{self.appeal.capitalize()} is {self.lower_first(self.personality)}.\n'
-                f'{self.appeal.capitalize()} is wearing {self.clothing_style}.\n'
-                f'{self.appeal_other.capitalize()} hairstyle is {self.lower_first(self.hairstyle)}. {self.appeal_other} affectation is {self.lower_first(self.affectation)}.\n'
-                f'{self.appeal.capitalize()} is value {self.lower_first(self.motivation)} the most. {self.appeal} feels about others "{self.relationships}".\n'
-                f'{self.most_valued_person} is {self.lower_first(self.appeal_other)} most valued person.\n'
-                f'{self.appeal_other.capitalize()} {self.most_valued_possession[2:]} is most valued possession.\n'
-                f'Family:\n{self.appeal.capitalize()} is from {self.family_background[0]} family.\n'
-                f'"{self.family_background[1]}"\n'
-                f'{self.appeal.capitalize()} where spend {self.lower_first(self.appeal_other)} childhood {self.lower_first(self.childhood_environment)}\n'
-                f'But {family_crisis}\n'
-                f'Life goals: {self.life_goals}\n'
-                f'Friends:\n{self.friends}\n'
-                f'Enemies:\n{self.enemies}\n'
-                f'Love affairs:\n{self.love}'
-                )
+        message_person = (
+            f'Person:\n'
+            f'{self.appeal.capitalize()} is from {self.cultural_region} region. Speaks {self.language}.\n'
+            f'{self.appeal.capitalize()} is {self.lower_first(self.personality)}.\n'
+            f'{self.appeal.capitalize()} is wearing {self.clothing_style}.\n'
+            f'{self.appeal_other.capitalize()} hairstyle is {self.lower_first(self.hairstyle)}. '
+            f'{self.appeal_other} affectation is {self.lower_first(self.affectation)}.\n'
+            f'{self.appeal.capitalize()} is value {self.lower_first(self.motivation)} the most. '
+            f'{self.appeal} feels about others "{self.relationships}".\n'
+            f'{self.most_valued_person} is {self.lower_first(self.appeal_other)} most valued person.\n'
+            f'{self.appeal_other.capitalize()} {self.most_valued_possession[2:]} is most valued possession.\n'
+            f'Family:\n'
+            f'{self.appeal.capitalize()} is from {self.family_background[0]} family.\n'
+            f'"{self.family_background[1]}"\n'
+            f'{self.appeal.capitalize()} where spend {self.lower_first(self.appeal_other)} childhood '
+            f'{self.lower_first(self.childhood_environment)}\n'
+            f'But {crisis}\n'
+            f'Life goals: {self.life_goals}\n'
+            f'Friends:\n{self.friends}\n'
+            f'Enemies:\n{self.enemies}\n'
+            f'Love affairs:\n{self.love}'
+        )
 
         return message_first + self.message_role + message_person
 
@@ -486,7 +505,7 @@ class Nomad(Character):
                              )
 
 
-def main(name, role, sex, tables_path):
+def main(name, role, sex, tables_path='data/tables.yaml'):
     """
     Generate the main character of the game based on the given name, role, sex, and tables path.
 
@@ -517,7 +536,7 @@ def main(name, role, sex, tables_path):
     char = role_class(name, role, sex, tables)
     char.create(role)
 
-    print(char)
+    return char
 
 
 if __name__ == '__main__':
@@ -536,4 +555,4 @@ if __name__ == '__main__':
     args = parse.parse_args()
 
 
-    main(**vars(args))
+    print(main(**vars(args)))
