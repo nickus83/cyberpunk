@@ -10,6 +10,21 @@ from faker import Faker
 
 fake = Faker()
 
+def generate_name(sex: str) -> str:
+    """
+    Generates a name based on the given sex.
+
+    Parameters:
+        sex (str): The sex of the person. Can be 'female' or 'male'.
+
+    Returns:
+        str: The generated name based on the given sex.
+    """
+    if sex == 'female':
+        return fake.name_female()
+    else:
+        return fake.name_male()
+
 @dataclass
 class Character:
     name: str
@@ -49,12 +64,11 @@ class Character:
         self.class_name = role.capitalize()
 
         if self.name == None:
+            self.name = generate_name(self.sex)
             if self.sex == 'female':
-                self.name = fake.name_female()
                 self.appeal = 'she'
                 self.appeal_other = 'her'
             else: # TODO: name dependency from cultiral origins
-                self.name = fake.name_male()
                 self.appeal = 'he' # TODO check for appeal he/she in message roles
                 self.appeal_other = 'his'
 
@@ -99,7 +113,7 @@ class Character:
         """
         if "/" in keyword:
             keywords = keyword
-        else: # TODO: fix on a possibilty, not a very good decicion. Capitalize works wrong on word with "/"
+        else: # TODO: fix on a possibilty, not a very good decishion. Capitalize works wrong on word with "/"
             keywords = " ".join([word.capitalize() for word in keyword.split(' ')])
 
         return self.tables[self.class_name + ' ' + keywords][dice.roll(f'1d{int(dice_number)}t')]
@@ -209,10 +223,7 @@ class Enemy(object):
         self.enemy_type = tables['Enemy type'][dice.roll('1d10t')]
 
         self.sex = choice(['male', 'female'])
-        if self.sex == 'female':
-            self.name = fake.name_female()
-        else:
-            self.name = fake.name_male()
+        self.name = generate_name(self.sex)
 
         self.wrong = tables['Enemy wrong'][dice.roll('1d10t')]
         self.throw = self._get_enemy_throw(tables)
@@ -239,11 +250,7 @@ class Enemy(object):
 class Love(object): # TODO: pass character sex as argument and make love sex choice opposite to characer sex
     def __init__(self, tables) -> None: # TODO think about straight of homo of character
         self.sex = choice(['male', 'female'])
-        if self.sex == 'female':
-            self.name = fake.name_female() # TODO make this a function, code repeats
-        else:
-            self.name = fake.name_male()
-
+        self.name = generate_name(self.sex)
         self.happend = tables['Love happened'][dice.roll('1d10t')]
 
     def __repr__(self) -> str:
