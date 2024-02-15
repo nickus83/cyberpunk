@@ -118,7 +118,7 @@ class Character:
 
         return self.tables[self.class_name + ' ' + keywords][dice.roll(f'1d{int(dice_number)}t')]
 
-    @staticmethod
+    @staticmethod # TODO: make separate function, not a class method
     def lower_first(input: str) -> str:
         """
         Convert the first character of a string to lowercase.
@@ -356,7 +356,7 @@ class Rockerboy(Character):
     def create(self, role: str) -> None:
         super().create(role)
         self.character_type = self.get_table('Type', 10)
-        self.in_group = choice([True, False])
+        self.in_group = choice([True, False]) #TODO: make it True, False everywhere
 
         if self.in_group == False:
             self.were_in_group = choice([True, False])
@@ -581,6 +581,9 @@ def main(name, role, sex, tables_path='data/tables.yaml'):
 
     return char
 
+    #TODO: try translator library for Russian https://pypi.org/project/translators/
+    #TODO: move all characters classes to separate file
+    #TODO: try something to check right sentences
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
@@ -590,7 +593,7 @@ if __name__ == '__main__':
                        help='name of a character')
     parse.add_argument('-r', '--role', required=False, type=str,
                        default=None,
-                       help='role of a character')
+                       help='role of a character, random choice if not set')
     parse.add_argument('-s', '--sex', default=None, type=str,
                        help='sex of a character, random choice if not set')
     parse.add_argument('-t', '--tables-path', default='data/tables.yaml',
