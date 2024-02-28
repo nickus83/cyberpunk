@@ -89,11 +89,22 @@ class Character:
 
         self.cultural_region, self.language = self.cultural_origins()
 
-        self.random_attributes(self.attributes_names)
+        self.set_attributes(self.attributes_names)
 
         self.friends = self.get_friends_enemies_or_love(Friend)
         self.enemies = self.get_friends_enemies_or_love(Enemy)
         self.love = self.get_friends_enemies_or_love(Love)
+
+    def set_attributes(self, attributes_names: list) -> None:
+        """
+        Set attributes based on the given attribute names list.
+        Args:
+            attributes_names (list): A list of attribute names
+        """
+
+        #TODO: set atributes at random or manualy, for now only random
+        self.random_attributes(attributes_names)
+
 
     def random_attributes(self, attributes_names: list) -> None:
         """Convert a list of names to attributes leading to correstonding tables
