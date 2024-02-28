@@ -53,28 +53,7 @@ class Character:
 
     message_role: str = ''
 
-    def create(self, role: str) -> None:
-        """Main create functions. Generates character role attributes
-            based on given role and corresponding tables.
-            This method (and class) is abstract  dont't create this object/
-
-        Args:
-            role (str): name of a role
-        """
-        self.class_name = role.capitalize()
-
-        if self.name == None:
-            self.name = generate_name(self.sex)
-            if self.sex == 'female':
-                self.appeal = 'she'
-                self.appeal_other = 'her'
-            else: # TODO: name dependency from cultiral origins
-                self.appeal = 'he' # TODO check for appeal he/she in message roles
-                self.appeal_other = 'his'
-
-        self.cultural_region, self.language = self.cultural_origins()
-
-        attributes_names = ['personality',
+    attributes_names = ['personality',
                             'clothing_style',
                             'hairstyle',
                             'affectation',
@@ -87,21 +66,48 @@ class Character:
                             'family_crisis',
                             'life_goals']
 
-        self.from_table(attributes_names)
+    def create(self, role: str, name: str = None) -> None:
+        """Main create functions. Generates character role attributes
+            based on given role and corresponding tables.
+            This method (and class) is abstract  dont't create this object/
+
+        Args:
+            role (str): name of a role
+        """
+        self.class_name = role.capitalize()
+
+        if self.name is None:
+            self.name = generate_name(self.sex)
+
+        self.name = name
+        if self.sex == 'female':
+            self.appeal = 'she'
+            self.appeal_other = 'her'
+        else: # TODO: name dependency from cultiral origins
+            self.appeal = 'he' # TODO check for appeal he/she in message roles
+            self.appeal_other = 'his'
+
+        self.cultural_region, self.language = self.cultural_origins()
+
+        self.random_attributes(self.attributes_names)
 
         self.friends = self.get_friends_enemies_or_love(Friend)
         self.enemies = self.get_friends_enemies_or_love(Enemy)
         self.love = self.get_friends_enemies_or_love(Love)
 
-    def from_table(self, attributes_names: list) -> None:
+    def random_attributes(self, attributes_names: list) -> None:
         """Convert a list of names to attributes leading to correstonding tables
-
+            and take a random value from the table
         Args:
             attributes_names (list): list of names that will be the attributes
         """
         for attribute_name in attributes_names:
             table_name = attribute_name.replace('_', ' ').title()
             self.__dict__[attribute_name] = self.tables[table_name][dice.roll('1d10t')]
+
+    def chosen_atribute(self, attribute_names: str) -> None:
+        ... #TODO: for manualy choosing atributes
+
 
     def get_table(self, keyword: str, dice_number: int) -> str:
         """Finds corresponing table based on class name and given keyword
@@ -265,9 +271,9 @@ class Fixer(Character):
     clients: str = None
     gunning: str = None
 
-    def create(self, role: str) -> None:
+    def create(self, role: str, name: str = None) -> None:
         # Call the parent class method to create the role
-        super().create(role)
+        super().create(role, name)
 
         # Set the character type using the 'Type' table
         self.character_type = self.get_table('Type', 10)
@@ -300,8 +306,8 @@ class Media(Character):
     ethics: str = None
     stories: str = None
 
-    def create(self, role: str) -> None:
-        super().create(role)
+    def create(self, role: str, name: str = None) -> None:
+        super().create(role, name)
         self.character_type = self.get_table('Type', 6)
         self.source = self.get_table('Source', 6)
         self.ethics = self.get_table('Ethics', 6)
@@ -321,8 +327,8 @@ class Exec(Character):
     gunning: str = None
     boss: str = None
 
-    def create(self, role: str) -> None:
-        super().create(role)
+    def create(self, role: str, name: str = None) -> None:
+        super().create(role, name)
         self.character_type = self.get_table('Type', 10)
         division_roll = dice.roll('1d6t')
         if division_roll == 5:
@@ -353,8 +359,8 @@ class Rockerboy(Character):
     leave: str = None
     gunning: str = None
 
-    def create(self, role: str) -> None:
-        super().create(role)
+    def create(self, role: str, name: str = None) -> None:
+        super().create(role, name)
         self.character_type = self.get_table('Type', 10)
         self.in_group = choice([True, False]) #TODO: make it True, False everywhere
 
@@ -382,8 +388,8 @@ class Solo(Character):
     operational_territory: str = None
     gunning: str = None # TODO check for gunning for other classes. gunning is who hunts the character
 
-    def create(self, role: str) -> None:
-        super().create(role)
+    def create(self, role: str, name: str = None) -> None:
+        super().create(role, name)
         self.character_type = self.get_table('Type', 6)
         if '/' in self.character_type:
             temp = []
@@ -415,8 +421,8 @@ class Netrunner(Character):
     supplies: str = None
     gunning: str = None
 
-    def create(self, role: str) -> None:
-        super().create(role)
+    def create(self, role: str, name: str = None) -> None:
+        super().create(role, name)
         self.character_type = self.get_table('Type', 6)
         self.alone = choice([True, False])
         if not self.alone:
@@ -444,8 +450,8 @@ class Tech(Character):
     supplies: str = None
     gunning: str = None
 
-    def create(self, role: str) -> None:
-        super().create(role)
+    def create(self, role: str, name: str = None) -> None:
+        super().create(role, name)
         self.character_type = self.get_table('Type', 10)
 
         self.alone = choice([True, False])
@@ -473,8 +479,8 @@ class Medtech(Character):
     clients: str = None
     supplies: str = None
 
-    def create(self, role: str) -> None:
-        super().create(role)
+    def create(self, role: str, name: str = None) -> None:
+        super().create(role, name)
         self.character_type = self.get_table('Type', 10)
         self.alone = choice([True, False])
         if not self.alone:
@@ -498,8 +504,8 @@ class Lawman(Character):
     gunning: str = None
     target: str = None
 
-    def create(self, role: str) -> None:
-        super().create(role)
+    def create(self, role: str, name: str = None) -> None:
+        super().create(role, name)
         self.character_type = self.get_table('Type', 6)
         self.jurisdiction = self.get_table('Jurisdiction', 6)
         self.corrupt = self.get_table('Corrupt', 6)
@@ -523,8 +529,8 @@ class Nomad(Character):
     pack_philosophy: str = None
     pack_gunning: str = None
 
-    def create(self, role: str) -> None:
-        super().create(role)
+    def create(self, role: str, name: str = None) -> None:
+        super().create(role, name)
         self.pack_size = self.get_table('Pack Size', 6)
 
         self.pack_type = choice(['land', 'air', 'sea'])
@@ -568,6 +574,8 @@ def main(name, role, sex, tables_path='data/tables.yaml'):
 
     if not role:
         role = choice(tables['roles']).lower()
+    else:
+        role = role.lower()
 
     message = f"No such role '{role}'. Choose from {[i for i in tables['roles']]}"
     assert role.capitalize() in tables['roles'], message
@@ -577,7 +585,8 @@ def main(name, role, sex, tables_path='data/tables.yaml'):
 
     role_class = globals()[role.capitalize()]
     char = role_class(name, role, sex, tables)
-    char.create(role)
+    import pdb; pdb.set_trace()
+    char.create(role, name)
 
     return char
 
