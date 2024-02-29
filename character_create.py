@@ -596,7 +596,6 @@ def main(name, role, sex, tables_path='data/tables.yaml'):
 
     role_class = globals()[role.capitalize()]
     char = role_class(name, role, sex, tables)
-    import pdb; pdb.set_trace()
     char.create(role, name)
 
     return char
