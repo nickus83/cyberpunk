@@ -66,7 +66,7 @@ class Character:
                             'family_crisis',
                             'life_goals']
 
-    def create(self, role: str, name: str = None) -> None:
+    def __post_init__(self) -> None:
         """Main create functions. Generates character role attributes
             based on given role and corresponding tables.
             This method (and class) is abstract  dont't create this object/
@@ -74,12 +74,11 @@ class Character:
         Args:
             role (str): name of a role
         """
-        self.class_name = role.capitalize()
+        self.class_name = self.role.capitalize()
 
         if self.name is None:
             self.name = generate_name(self.sex)
 
-        self.name = name
         if self.sex == 'female':
             self.appeal = 'she'
             self.appeal_other = 'her'
@@ -282,9 +281,9 @@ class Fixer(Character):
     clients: str = None
     gunning: str = None
 
-    def create(self, role: str, name: str = None) -> None:
+    def __post_init__(self) -> None:
         # Call the parent class method to create the role
-        super().create(role, name)
+        super().__post_init__()
 
         # Set the character type using the 'Type' table
         self.character_type = self.get_table('Type', 10)
@@ -317,8 +316,8 @@ class Media(Character):
     ethics: str = None
     stories: str = None
 
-    def create(self, role: str, name: str = None) -> None:
-        super().create(role, name)
+    def __post_init__(self) -> None:
+        super().__post_init__()
         self.character_type = self.get_table('Type', 6)
         self.source = self.get_table('Source', 6)
         self.ethics = self.get_table('Ethics', 6)
@@ -338,8 +337,8 @@ class Exec(Character):
     gunning: str = None
     boss: str = None
 
-    def create(self, role: str, name: str = None) -> None:
-        super().create(role, name)
+    def __post_init__(self) -> None:
+        super().__post_init__()
         self.character_type = self.get_table('Type', 10)
         division_roll = dice.roll('1d6t')
         if division_roll == 5:
@@ -370,8 +369,8 @@ class Rockerboy(Character):
     leave: str = None
     gunning: str = None
 
-    def create(self, role: str, name: str = None) -> None:
-        super().create(role, name)
+    def __post_init__(self) -> None:
+        super().__post_init__()
         self.character_type = self.get_table('Type', 10)
         self.in_group = choice([True, False]) #TODO: make it True, False everywhere
 
@@ -399,8 +398,8 @@ class Solo(Character):
     operational_territory: str = None
     gunning: str = None # TODO check for gunning for other classes. gunning is who hunts the character
 
-    def create(self, role: str, name: str = None) -> None:
-        super().create(role, name)
+    def __post_init__(self) -> None:
+        super().__post_init__()
         self.character_type = self.get_table('Type', 6)
         if '/' in self.character_type:
             temp = []
@@ -432,8 +431,8 @@ class Netrunner(Character):
     supplies: str = None
     gunning: str = None
 
-    def create(self, role: str, name: str = None) -> None:
-        super().create(role, name)
+    def __post_init__(self) -> None:
+        super().__post_init__()
         self.character_type = self.get_table('Type', 6)
         self.alone = choice([True, False])
         if not self.alone:
@@ -461,8 +460,8 @@ class Tech(Character):
     supplies: str = None
     gunning: str = None
 
-    def create(self, role: str, name: str = None) -> None:
-        super().create(role, name)
+    def __post_init__(self) -> None:
+        super().__post_init__()
         self.character_type = self.get_table('Type', 10)
 
         self.alone = choice([True, False])
@@ -490,8 +489,8 @@ class Medtech(Character):
     clients: str = None
     supplies: str = None
 
-    def create(self, role: str, name: str = None) -> None:
-        super().create(role, name)
+    def __post_init__(self) -> None:
+        super().__post_init__()
         self.character_type = self.get_table('Type', 10)
         self.alone = choice([True, False])
         if not self.alone:
@@ -515,8 +514,8 @@ class Lawman(Character):
     gunning: str = None
     target: str = None
 
-    def create(self, role: str, name: str = None) -> None:
-        super().create(role, name)
+    def __post_init__(self) -> None:
+        super().__post_init__()
         self.character_type = self.get_table('Type', 6)
         self.jurisdiction = self.get_table('Jurisdiction', 6)
         self.corrupt = self.get_table('Corrupt', 6)
@@ -540,8 +539,8 @@ class Nomad(Character):
     pack_philosophy: str = None
     pack_gunning: str = None
 
-    def create(self, role: str, name: str = None) -> None:
-        super().create(role, name)
+    def __post_init__(self) -> None:
+        super().__post_init__()
         self.pack_size = self.get_table('Pack Size', 6)
 
         self.pack_type = choice(['land', 'air', 'sea'])
@@ -596,7 +595,6 @@ def main(name, role, sex, tables_path='data/tables.yaml'):
 
     role_class = globals()[role.capitalize()]
     char = role_class(name, role, sex, tables)
-    char.create(role, name)
 
     return char
 
